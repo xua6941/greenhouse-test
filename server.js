@@ -9,8 +9,12 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-app.use(express.static(__dirname)); // index.html, main.js, models 폴더 등 제공
-app.use('/sensor_logs', express.static(path.join(__dirname, '../py/sensor_logs')));
+app.use(express.static(__dirname, 'public')); // index.html, main.js, models 폴더 등 제공
+app.use('/sensor_logs', express.static(path.join(__dirname, 'sensor_logs')));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 app.get('/sensor-data.json', (req, res) => {
     fs.readFile('received_sensor_data.json', 'utf8', (err, data) => {
