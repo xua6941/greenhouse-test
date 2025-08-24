@@ -9,7 +9,7 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-app.use(express.static(__dirname, 'public')); // index.html, main.js, models 폴더 등 제공
+app.use(express.static(path.join(__dirname, 'public'))); // index.html, main.js, models 폴더 등 제공
 app.use('/sensor_logs', express.static(path.join(__dirname, 'sensor_logs')));
 
 app.get("/", (req, res) => {
@@ -44,7 +44,8 @@ chokidar.watch(jsonPath).on("change", () => {
     });
 });
 
-const PORT = 3009;
+// Render는 환경변수 PORT 자동 제공
+const PORT = process.env.PORT || 3009;
 server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
