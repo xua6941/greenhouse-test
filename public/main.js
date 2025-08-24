@@ -1025,7 +1025,7 @@ fetchSensorDataPeriodically(); // 페이지 시작 시 한 번 호출
 //------------------------------------------------------------------
 
 
-const socket = new WebSocket("ws://localhost:3009"); // 외부 공개 시 ngrok 주소로 변경
+const socket = new WebSocket("https://greenhouse-server-6d8l.onrender.com"); // 외부 공개 시 ngrok 주소로 변경
 
 socket.onopen = () => console.log("WebSocket 연결 성공");
 socket.onerror = (error) => {
